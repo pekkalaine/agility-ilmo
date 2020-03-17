@@ -2,7 +2,7 @@
 
 [Sovellus Herokussa](https://infinite-taiga-05928.herokuapp.com/customers)
 
-[Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/tietokantakaavio.jpg)
+[Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Tietokantakaavio.png)
 
 [Käyttötapaukset](https://github.com/pekkalaine/agility-ilmo/blob/master//documentation/kayttotapaukset.md)
 
@@ -26,27 +26,41 @@ Kouluttaja voi
 * lisätä/muokata/poistaa asiakkaiden ja koirien tietoja
 * lisätä kursseja
 * päivittää kurssien tietoja
+* poistaa kursseja
 * poistaa ilmoittautumisia.
 
 ## Tietokantataulut
 
-Asiakas
-* Id
-* Nimi
-* Yhteystiedot
+**Asiakas**
+(pk) id: integer
+nimi: string
+käyttäjätunnus: string
+salasana: string
+yhteystiedot: string
 
-Koira
-* Id
-* Nimi
-* Rotu
+**Koira**
+(pk) id: integer
+(fk) asiakas_id: Asiakas
+nimi: string
+rotu: string
 
-Kurssi
-* Id
-* Nimi
-* Ajankohta
-* Maksimi osallistujamäärä
+**Kurssi**
+(pk) id: integer
+(fk) kouluttaja_id: Kouluttaja
+nimi: string
+kurssikuvaus: string
+ajankohta: string
+maksimi osallistujamäärä: integer
 
-Kouluttaja
-* id
-* Nimi
-* yhteystiedot
+
+**KurssiKoira**
+(fk) koira_id: Koira
+(fk) kurssi_id: Kurssi
+
+
+**Kouluttaja**
+(pk) id: integer
+nimi: string
+käyttäjätunnus: string
+salasana: string
+yhteystiedot: string
