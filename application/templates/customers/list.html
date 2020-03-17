@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    
+
+    <div class="row justify-content-md-center mt-5">
+
+        <div class="col-12 ">
+
+    <h3 class="mb-4">Asiakkaat</h3>
+        <table class="table table-sm table-bordered table-hover">
+            <thead>
+                <tr>
+                <th scope="col" style="width: 35%">Nimi</th>
+                <th scope="col" style="width: 45%">Osoite</th>
+                <th scope="col" style="width: 10%"></th>
+                <th scope="col" style="width: 10%"></th>
+                </tr>
+            </thead>
+
+            {% for customer in customers %}
+            <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.address }}</td>
+            <td><a href="/update/{{customer.id}}" class="text-dark">Päivitä</a></td>
+            <td><a href="/delete/{{customer.id}}" class="text-dark">Poista</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+{% endblock %}

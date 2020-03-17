@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<div class="col-6 bg-light border mt-5">
+  <div class="form">
+
+    <form method="POST" action="{{ url_for('customers_create') }}">
+      
+      <h4 class="mb-4 mt-2">Lisää asiakas</h4>
+      <input type="text" class="w-50 mb-2" name="customer_name" placeholder="Asiakkaan nimi"/>
+      <input type="text" class="w-50 mb-2" name="customer_address" placeholder="Asiakkaan yhteystiedot">
+      <br>
+      <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Lisää asiakas"/>
+    </form>
+  </div>
+</div>
+{% endblock %}
