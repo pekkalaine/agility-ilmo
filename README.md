@@ -32,32 +32,32 @@ Kouluttaja voi
 ## Tietokantataulut
 
 **Asiakas**
-* (pk) id: integer
+* (pk) id: int
 * nimi: string
 * käyttäjätunnus: string
 * salasana: string
 * yhteystiedot: string
 
 **Koira**
-* (pk) id: integer
+* (pk) id: int
 * (fk) asiakas_id: Asiakas
 * nimi: string
 * rotu: string
 
 **Kurssi**
-* (pk) id: integer
+* (pk) id: int
 * (fk) kouluttaja_id: Kouluttaja
 * nimi: string
 * kurssikuvaus: string
 * ajankohta: string
-* maksimi osallistujamäärä: integer
+* maksimi osallistujamäärä: int
 
 **KurssiKoira**
 * (fk) koira_id: Koira
 * (fk) kurssi_id: Kurssi
 
 **Kouluttaja**
-* (pk) id: integer
+* (pk) id: int
 * nimi: string
 * käyttäjätunnus: string
 * salasana: string

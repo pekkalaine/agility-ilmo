@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<div class="col-6 bg-light border mt-5">
+  <div class="form">
+
+    <form method="POST" action="{{ url_for('dogs_create') }}">
+      
+      <h4 class="mb-4 mt-2">Lisää koira</h4>
+      <!-- <input type="text" class="w-50 mb-2" name="dog_name" placeholder="Koiran nimi"/>
+      <input type="text" class="w-50 mb-2" name="dog_race" placeholder="Koiran rotu"> -->
+      <table>
+        <tr>
+          <td>
+            {{ form.name.label }}
+          </td>
+          <td>
+            {{ form.name }}
+          </td>
+          <td>
+            <ul>
+              {% for error in form.name.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.race.label }}
+          </td>
+          <td>
+            {{ form.race }}
+          </td>
+          <td>
+            <ul>
+              {% for error in form.race.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Lisää koira"/>
+          </td>
+        </tr>
+
+
+      </table>  
+
+      
+    </form>
+  </div>
+</div>
+{% endblock %}

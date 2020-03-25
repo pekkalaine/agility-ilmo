@@ -11,7 +11,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Agility-ilmo</a>
+      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,18 +19,39 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           
+          <li class="nav-item">
+
+            {% if current_user.is_authenticated %}
+              <p class="navbar-brand"> Kirjautunut: {{ current_user.name }} </p>
+            {% else %}
+              <a class="nav-link" href="{{ url_for('auth_login') }}">Kirjaudu</a>
+            {% endif %}
+
+          </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Sisällys
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/">Etusivu</a>
-              <a class="dropdown-item" href="{{ url_for('customers_index') }}">Listaa asiakkaat</a>
-              <a class="dropdown-item" href="{{ url_for('customers_form') }}">Lisää asiakas</a>
+              <a class="dropdown-item" href="{{ url_for('dogs_index') }}">Listaa koirat</a>
+              <a class="dropdown-item" href="{{ url_for('dogs_form') }}">Lisää koira</a>
+              <a class="dropdown-item" href="{{ url_for('users_index') }}">Listaa käyttäjät</a>
 
             </div>
           </li>
-          
+          {% if current_user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
+            </li>
+          {% endif %}
+          {% if not current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('users_form') }}">Rekisteröidy</a>
+          </li>
+          {% endif %}
+
         </ul>
       </div>
     </nav>

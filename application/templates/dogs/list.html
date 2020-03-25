@@ -7,23 +7,23 @@
 
         <div class="col-12 ">
 
-    <h3 class="mb-4">Asiakkaat</h3>
+    <h3 class="mb-4">Koirat</h3>
         <table class="table table-sm table-bordered table-hover">
             <thead>
                 <tr>
                 <th scope="col" style="width: 35%">Nimi</th>
-                <th scope="col" style="width: 45%">Osoite</th>
+                <th scope="col" style="width: 45%">Rotu</th>
                 <th scope="col" style="width: 10%"></th>
                 <th scope="col" style="width: 10%"></th>
                 </tr>
             </thead>
 
-            {% for customer in customers %}
+            {% for dog in dogs %}
             <tr>
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.address }}</td>
-            <td><a href="/update/{{customer.id}}" class="text-dark">Päivitä</a></td>
-            <td><a href="/delete/{{customer.id}}" class="text-dark">Poista</a></td>
+            <td>{{ dog.name }}</td>
+            <td>{{ dog.race }}</td>
+            <td><a href="/update/{{dog.id}}" class="text-dark">Päivitä</a></td>
+            <td><a href="/delete/{{dog.id}}" class="text-dark">Poista</a></td>
             </tr>
             {% endfor %}
         </table>
