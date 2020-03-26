@@ -1,7 +1,10 @@
 # Agility-ilmo
 
 [Sovellus Herokussa](https://infinite-taiga-05928.herokuapp.com)
+
 Käyttäjätunnus: Kalle, Salasana: Hello
+
+Sovelluksen Heroku-versio toimii joten kuten incognitossa.
 
 [Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Tietokantakaavio.png)
 
