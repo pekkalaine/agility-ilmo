@@ -10,8 +10,10 @@ class User(db.Model):
                               onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
-    username = db.Column(db.String(144), nullable=False)
+    username = db.Column(db.String(144), unique=True, nullable=False)
     password = db.Column(db.String(144), nullable=False)
+
+    tasks = db.relationship("Dog", backref='account', lazy=True)
 
     def __init__(self, name, username, password):
         self.name = name

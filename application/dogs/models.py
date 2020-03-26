@@ -10,6 +10,9 @@ class Dog(db.Model):
     name = db.Column(db.String(200), nullable=False)
     race = db.Column(db.String(200), nullable=False)
 
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
+                           nullable=False)
+
     def __init__(self, name, race):
         self.name = name
         self.race = race

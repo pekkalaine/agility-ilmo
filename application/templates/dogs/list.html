@@ -2,31 +2,36 @@
 
 {% block body %}
     
-
     <div class="row justify-content-md-center mt-5">
 
         <div class="col-12 ">
 
-    <h3 class="mb-4">Koirat</h3>
-        <table class="table table-sm table-bordered table-hover">
-            <thead>
-                <tr>
-                <th scope="col" style="width: 35%">Nimi</th>
-                <th scope="col" style="width: 45%">Rotu</th>
-                <th scope="col" style="width: 10%"></th>
-                <th scope="col" style="width: 10%"></th>
-                </tr>
-            </thead>
+            <h3 class="mb-4">Koirat</h3>
+            <table class="table table-sm table-bordered table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col" style="width: 20%">Nimi</th>
+                    <th scope="col" style="width: 20%">Rotu</th>
+                    <th scope="col" style="width: 20%">Omistaja</th>
+                    <th scope="col" style="width: 10%"></th>
+                    <th scope="col" style="width: 10%"></th>
+                    </tr>
+                </thead>
 
-            {% for dog in dogs %}
-            <tr>
-            <td>{{ dog.name }}</td>
-            <td>{{ dog.race }}</td>
-            <td><a href="/update/{{dog.id}}" class="text-dark">Päivitä</a></td>
-            <td><a href="/delete/{{dog.id}}" class="text-dark">Poista</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+                {% for dog in dogs %}
+                <tr>
+                <td>{{ dog.name }}</td>
+                <td>{{ dog.race }}</td>
+                <td>
+                    {% for user in users if user.id==dog.account_id %}
+                        {{ user.name }}
+                    {% endfor %}
+                </td>
+                <td><a href="/update/{{dog.id}}" class="text-dark">Päivitä</a></td>
+                <td><a href="/delete/{{dog.id}}" class="text-dark">Poista</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}

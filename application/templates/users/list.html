@@ -11,8 +11,9 @@
         <table class="table table-sm table-bordered table-hover">
             <thead>
                 <tr>
-                <th scope="col" style="width: 35%">Nimi</th>
-                <th scope="col" style="width: 45%">Käyttäjätunnus</th>
+                <th scope="col" style="width: 30%">Nimi</th>
+                <th scope="col" style="width: 30%">Käyttäjätunnus</th>
+                <th scope="col" style="width: 20%">Koirat</th>
                 <th scope="col" style="width: 10%"></th>
                 <th scope="col" style="width: 10%"></th>
                 </tr>
@@ -22,6 +23,15 @@
             <tr>
             <td>{{ user.name }}</td>
             <td>{{ user.username }}</td>
+
+            <td>
+                
+                {% for dog in dogs if user.id==dog.account_id %}
+                    {{ dog.name }}
+                {% endfor %}
+                
+            </td>
+
             <td><a href="/users/update/{{user.id}}" class="text-dark">Päivitä</a></td>
             <td><a href="/users/delete/{{user.id}}" class="text-dark">Poista</a></td>
             </tr>

@@ -1,20 +1,25 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
-from application.auth.models import User
+from flask_login import login_required
 
+from application.auth.models import User
+from application.dogs.models import Dog
 from application.users.forms import UserForm
 
 @app.route("/users/", methods=["GET"])
+@login_required
 def users_index():
-    return render_template("users/list.html", users=User.query.all())
+    return render_template("users/list.html", users=User.query.all(), dogs=Dog.query.all())
 
 
 @app.route("/users/new/")
+
 def users_form():
     return render_template("users/new.html", form=UserForm())
 
 
 @app.route("/users/", methods=["POST"])
+
 def users_create():
     form = UserForm(request.form)
 
@@ -30,6 +35,7 @@ def users_create():
 
 
 @app.route('/users/delete/<int:id>')
+@login_required
 def delete_user(id):
     user_to_delete = User.query.get_or_404(id)
 
@@ -40,6 +46,7 @@ def delete_user(id):
 
 
 @app.route('/users/update/<int:id>', methods=["GET", "POST"])
+@login_required
 def update_user(id):
     user = User.query.get_or_404(id)
 
