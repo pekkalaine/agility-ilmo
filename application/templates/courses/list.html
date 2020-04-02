@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    
+    <div class="row justify-content-md-center mt-5">
+
+        <div class="col-12 ">
+
+            <h3 class="mb-4">Kurssit</h3>
+            <p class="mb-4">Tämä näkymä tulee lopullisessa versiossa olemaan erilainen sen mukaan, 
+                onko kirjautuja asiakas vai kouluttaja: vain kouluttaja voi päivittää ja poistaa kursseja.</p>
+            <table class="table table-sm table-bordered table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col" style="width: 20%">Nimi</th>
+                    <th scope="col" style="width: 40%">Kuvaus</th>
+                    <th scope="col" style="width: 5%">Osallistujat</th>
+                    <th scope="col" style="width: 7,5%"></th>
+                    <th scope="col" style="width: 7,5%"></th>
+                    <th scope="col" style="width: 20%">Lisää koirasi kurssille</th>
+
+
+                    </tr>
+                </thead>
+
+                {% for course in courses %}
+                <tr>
+                <td>{{ course.name }}</td>
+                <td>{{ course.description }}</td>
+                <td>{{ course.max_participants }}</td>
+                <td><a href="/courses/update/{{course.id}}" class="text-dark">Päivitä</a></td>
+                <td><a href="/courses/delete/{{course.id}}" class="text-dark">Poista</a></td>
+                <td><i>toteuttamatta</i></td>
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -2,12 +2,12 @@
 
 {% block body %}
 
+
             <div class="col-6 bg-light border mt-5">
                 <div class="form">
-                    <form action="/users/update/{{user.id}}" method="POST">
-
-                      <h4 class="mb-4 mt-2">Päivitä käyttäjän tietoja: {{user.name}}</h4>
-
+                    <form action="/courses/update/{{course.id}}" method="POST">
+                   
+                        <h4 class="mb-4 mt-2">Päivitä kurssin tietoja: {{course.name}}</h4>
                         <table>
                             <tr>
                               <td>
@@ -17,14 +17,23 @@
                                 {{ form.name }}
                               </td>
                               
-                              
                             </tr>
                             <tr>
                               <td>
-                                {{ form.username.label }}
+                                {{ form.description.label }}
                               </td>
                               <td>
-                                {{ form.username }}
+                                {{ form.description }}
+                              </td>
+                              
+                            </tr>
+
+                            <tr>
+                              <td>
+                                {{ form.max_participants.label }}
+                              </td>
+                              <td>
+                                {{ form.max_participants }}
                               </td>
                               
                             </tr>
@@ -37,8 +46,13 @@
                         
                         
                           </table>
+
                     </form>
                 </div>
             </div>
 
+
+
 {% endblock %}
+
+

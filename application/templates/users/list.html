@@ -7,36 +7,76 @@
 
         <div class="col-12 ">
 
-    <h3 class="mb-4">Käyttäjät</h3>
-        <table class="table table-sm table-bordered table-hover">
-            <thead>
+            <h3 class="mb-4">Käyttäjät</h3>
+            <p class="mb-4">Lopullisessa versiossa tämä näkyy vain kouluttajana kirjautuneelle</p>
+
+            <table class="table table-sm table-bordered table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col" style="width: 30%">Nimi</th>
+                    <th scope="col" style="width: 30%">Käyttäjätunnus</th>
+                    <th scope="col" style="width: 20%">Koirat</th>
+                    <th scope="col" style="width: 10%"></th>
+                    <th scope="col" style="width: 10%"></th>
+                    </tr>
+                </thead>
+
+                {% for user in users %}
                 <tr>
-                <th scope="col" style="width: 30%">Nimi</th>
-                <th scope="col" style="width: 30%">Käyttäjätunnus</th>
-                <th scope="col" style="width: 20%">Koirat</th>
-                <th scope="col" style="width: 10%"></th>
-                <th scope="col" style="width: 10%"></th>
+                <td>{{ user.name }}</td>
+                <td>{{ user.username }}</td>
+
+                <td>
+                    
+                    {% for dog in dogs if user.id==dog.account_id %}
+                        {{ dog.name }}
+                    {% endfor %}
+                    
+                </td>
+
+                <td><a href="/users/update/{{user.id}}" class="text-dark">Päivitä</a></td>
+                <td><a href="/users/delete/{{user.id}}" class="text-dark">Poista</a></td>
                 </tr>
-            </thead>
-
-            {% for user in users %}
-            <tr>
-            <td>{{ user.name }}</td>
-            <td>{{ user.username }}</td>
-
-            <td>
-                
-                {% for dog in dogs if user.id==dog.account_id %}
-                    {{ dog.name }}
                 {% endfor %}
-                
-            </td>
+            </table>
 
-            <td><a href="/users/update/{{user.id}}" class="text-dark">Päivitä</a></td>
-            <td><a href="/users/delete/{{user.id}}" class="text-dark">Poista</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+
+            
+                <div class="form mt-5">
+              
+                    <form method="POST" action="{{ url_for('users_byrace') }}">
+                    
+                        <h4 class="mb-4">Hae käyttäjiä rodun mukaan</h4>
+
+                        <table>
+                            <tr>
+                                <td>
+                                  {{ form.race.label }}
+                                </td>
+                                <td>
+                                  {{ form.race }}
+                                </td>
+                                <td>
+                                  <ul>
+                                    {% for error in form.race.errors %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                                  </ul>
+                                </td>
+                              </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                  <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Hae"/>
+                                </td>
+                              </tr>
+                        </table>
+
+                    </form>
+                </div>
+            
+
+
+        </div>
     </div>
 {% endblock %}

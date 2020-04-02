@@ -7,14 +7,41 @@
                 <div class="form">
                     <form action="/update/{{dog.id}}" method="POST">
 
-                        <h4 class="mb-4 mt-2">Päivitä koiran tietoja: {{dog.name}}</h4>
-                        <input type="text" class="w-50 mb-2" name="dog_name" id="dog_name" value="{{dog.name}}">
-                        <input type="text" class="w-50 mb-2" name="dog_race" id="dog_race" value="{{dog.race}}">
-                        <br>
-                        <input type="submit" class="btn btn-light btn-sm mb-2 btn-outline-dark" value="Päivitä">
+                   
+                        <h4 class="mb-4 mt-2">Päivitä koiran tietoja: {{dog.name}}, {{dog.race}}</h4>
+                        <table>
+                            <tr>
+                              <td>
+                                {{ form.name.label }}
+                              </td>
+                              <td>
+                                {{ form.name }}
+                              </td>
+                              
+                              
+                            </tr>
+                            <tr>
+                              <td>
+                                {{ form.race.label }}
+                              </td>
+                              <td>
+                                {{ form.race }}
+                              </td>
+                              
+                            </tr>
+                        
+                            <tr>
+                              <td colspan="2">
+                                <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Päivitä koira"/>
+                              </td>
+                            </tr>
+                        
+                        
+                          </table>
 
                     </form>
                 </div>
             </div>
+
 
 {% endblock %}

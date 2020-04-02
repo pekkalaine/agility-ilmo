@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<div class="col-6 bg-light border mt-5">
+  <div class="form">
+
+    <form method="POST" action="{{ url_for('courses_create') }}">
+      
+      <h4 class="mb-4 mt-2">Lisää kurssi</h4>
+      
+      <table>
+        <tr>
+          <td>
+            {{ form.name.label }}
+          </td>
+          <td>
+            {{ form.name }}
+          </td>
+          <td>
+            <ul>
+              {% for error in form.name.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.description.label }}
+          </td>
+          <td>
+            {{ form.description }}
+          </td>
+          <td>
+            <ul>
+              {% for error in form.description.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.max_participants.label }}
+          </td>
+          <td>
+            {{ form.max_participants }}
+          </td>
+          <td>
+            <ul>
+              {% for error in form.max_participants.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Lisää kurssi"/>
+          </td>
+        </tr>
+
+
+      </table>  
+
+      
+    </form>
+  </div>
+</div>
+{% endblock %}

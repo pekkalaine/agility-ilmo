@@ -49,11 +49,17 @@ def update(id):
 
     if request.method == 'POST':
 
-        dog.name = request.form['dog_name']
-        dog.race = request.form['dog_race']
+        form = DogForm(request.form)
 
+        if not form.validate():
+            return render_template("/dogs", form=form)
+
+        dog.name = form.name.data
+        dog.race = form.race.data
+       
         db.session.commit()
         return redirect('/dogs')
     
     else:
-        return render_template('dogs/update.html', dog=dog)
+        return render_template('dogs/update.html', dog=dog, form=DogForm())
+        

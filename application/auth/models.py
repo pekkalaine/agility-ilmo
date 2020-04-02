@@ -1,19 +1,16 @@
 from application import db
+from application.models import Base
 
-class User(db.Model):
+from sqlalchemy.sql import text
+
+class User(Base):
 
     __tablename__ = "account"
 
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
-
-    name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), unique=True, nullable=False)
     password = db.Column(db.String(144), nullable=False)
 
-    tasks = db.relationship("Dog", backref='account', lazy=True)
+    dogs = db.relationship("Dog", backref='account', lazy=True)
 
     def __init__(self, name, username, password):
         self.name = name
@@ -31,3 +28,17 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+
+    @staticmethod
+    def find_users_with_race(race):
+        stmt = text("SELECT Account.id, Account.name FROM Account"
+                     " LEFT JOIN Dog ON Dog.account_id = Account.id"
+                     " WHERE (Dog.race  =  :race)"
+                     " GROUP BY Account.id").params(race=race)
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1]})
+
+        return response

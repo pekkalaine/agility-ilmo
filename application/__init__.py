@@ -21,7 +21,8 @@ from application.dogs import views
 from application.auth import models
 from application.auth import views
 
-from application.users import views
+from application.courses import models
+from application.courses import views
 
 # kirjautuminen
 from application.auth.models import User
