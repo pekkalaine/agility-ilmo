@@ -8,14 +8,13 @@ from application.courses.models import Course
 
 
 class CourseForm(FlaskForm):
-    id = IntegerField("Kurssin id", [validators.InputRequired()])
+    
     name = StringField("Kurssin nimi", [validators.InputRequired()])
     description = StringField("Kurssikuvaus", [validators.InputRequired()])
     max_participants = IntegerField("Osallistujamäärä", [validators.InputRequired()])
 
     class Meta:
         csrf = False
-
 
 def get_courses():
     return Course.query

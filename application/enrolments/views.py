@@ -17,6 +17,8 @@ def new_enrolment():
     course_id = course_form.course.data.id
 
     dog_id = request.form.get("dog_id")
-    
+
+    print('********************* course_id', course_id)
+    print('********************* dog_id', dog_id)
 
     return redirect(url_for("dogs_index"))

@@ -29,8 +29,13 @@ def dogs_form():
 def dogs_create():
     form = DogForm(request.form)
 
+    print('**************************** before validate')
+
     if not form.validate():
         return render_template("dogs/new.html", form=form)
+
+    print('**************************** after validate')
+
 
     c = Dog(form.name.data, form.race.data)
     c.account_id = current_user.id
