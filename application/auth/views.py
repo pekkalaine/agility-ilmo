@@ -32,6 +32,7 @@ def auth_logout():
 
 
 @app.route("/users/", methods=["GET"])
+@login_required
 def users_index():
     return render_template("users/list.html", users=User.query.all(), dogs=Dog.query.all(),  form=DogForm())
 
@@ -48,13 +49,20 @@ def users_create():
 
     c = User(form.name.data, form.username.data, form.password.data)
 
+    #Onko käyttäjä jo tietokannassa:
+    user = User.query.filter_by(username=form.username.data).first()
+    if user:
+        return render_template("users/new.html", form=form, error="Käyttäjätunnus on jo olemassa.")
+
+
     db.session().add(c)
     db.session().commit()
 
-    return redirect(url_for("users_index"))
+    return redirect(url_for("auth_login"))
 
 
 @app.route('/users/delete/<int:id>')
+@login_required
 def delete_user(id):
     user_to_delete = User.query.get_or_404(id)
 
@@ -65,6 +73,7 @@ def delete_user(id):
 
 
 @app.route('/users/update/<int:id>', methods=["GET", "POST"])
+@login_required
 def update_user(id):
     user = User.query.get_or_404(id)
 
@@ -86,10 +95,10 @@ def update_user(id):
 
 
 @app.route("/users/byrace", methods=["POST"])
+@login_required
 def users_byrace():
 
     form = DogForm(request.form)
     race = form.race.data
     
-
     return render_template("/users/byrace.html", race_owners=User.find_users_with_race(race), race=race)

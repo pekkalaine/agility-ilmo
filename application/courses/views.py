@@ -14,11 +14,13 @@ def courses_index():
 
 
 @app.route("/courses/new/")
+@login_required
 def courses_form():
     return render_template("courses/new.html", form=CourseForm())
 
 
 @app.route("/courses/", methods=["POST"])
+@login_required
 def courses_create():
     form = CourseForm(request.form)
 
@@ -34,6 +36,7 @@ def courses_create():
 
 
 @app.route('/courses/delete/<int:id>')
+@login_required
 def delete_course(id):
     course_to_delete = Course.query.get_or_404(id)
 
@@ -44,6 +47,7 @@ def delete_course(id):
 
 
 @app.route('/courses/update/<int:id>', methods=["GET", "POST"])
+@login_required
 def update_course(id):
     course = Course.query.get_or_404(id)
 

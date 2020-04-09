@@ -6,18 +6,26 @@ from application.dogs.models import Dog
 from application.auth.models import User
 from application.dogs.forms import DogForm
 
+from application.courses.forms import CoursesForm
+
 
 @app.route("/dogs", methods=["GET"])
+@login_required
 def dogs_index():
-    return render_template("dogs/list.html", dogs=Dog.query.all(), users=User.query.all())
+    user_id = current_user.id
 
+    form = CoursesForm()
+    
+    return render_template("dogs/list.html", dogs=Dog.find_dogs_of_user(user_id), user = User.query.get_or_404(user_id), form = form)
 
 @app.route("/dogs/new/")
+@login_required
 def dogs_form():
     return render_template("dogs/new.html", form=DogForm())
 
 
 @app.route("/dogs/", methods=["POST"])
+@login_required
 def dogs_create():
     form = DogForm(request.form)
 
@@ -34,6 +42,7 @@ def dogs_create():
 
 
 @app.route('/delete/<int:id>')
+@login_required
 def delete(id):
     dog_to_delete = Dog.query.get_or_404(id)
 
@@ -44,6 +53,7 @@ def delete(id):
 
 
 @app.route('/update/<int:id>', methods=["GET", "POST"])
+@login_required
 def update(id):
     dog = Dog.query.get_or_404(id)
 

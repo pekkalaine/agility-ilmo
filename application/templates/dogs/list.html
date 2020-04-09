@@ -6,37 +6,38 @@
 
         <div class="col-12 ">
 
-            <h3 class="mb-4">Koirat</h3>
-
-            <p class="mb-4">Lopullisessa versiossa tässä näkyy vain käyttäjän omat koirat</p>
+            <h3 class="mb-4">Käyttäjän {{user.name}} koirat</h3>
 
             <table class="table table-sm table-bordered table-hover">
                 <thead>
                     <tr>
-                    <th scope="col" style="width: 20%">Nimi</th>
+                    <th scope="col" style="width: 30%">Nimi</th>
                     <th scope="col" style="width: 20%">Rotu</th>
-                    <th scope="col" style="width: 15%">Omistaja</th>
-                    <th scope="col" style="width: 7,5%"></th>
-                    <th scope="col" style="width: 7,5%"></th>
+                    <th scope="col" style="width: 10%"></th>
+                    <th scope="col" style="width: 10%"></th>
                     <th scope="col" style="width: 30%">Lisää kurssille</th>
 
                     </tr>
                 </thead>
 
+                <!-- jokaisesta tr:stä form -->
                 {% for dog in dogs %}
-                <tr>
-                <td>{{ dog.name }}</td>
-                <td>{{ dog.race }}</td>
-                <td>
-                    {% for user in users if user.id==dog.account_id %}
-                        {{ user.name }}
-                    {% endfor %}
-                </td>
-                <td><a href="/update/{{dog.id}}" class="text-dark">Päivitä</a></td>
-                <td><a href="/delete/{{dog.id}}" class="text-dark">Poista</a></td>
-                <td><i>toteuttamatta</i></td>
 
-                </tr>
+                    <form method="POST" action="{{ url_for('new_enrolment') }}">
+                        
+                        <tr>
+
+                        <input type="text" name="dog_id" value="{{dog.id}}" hidden/> 
+                        
+                        <td style="vertical-align:baseline">{{ dog.name }} </td>
+                        <td style="vertical-align:baseline">{{ dog.race }}</td>
+                        <td style="vertical-align:baseline"><a href="/update/{{dog.id}}" class="text-dark">Päivitä</a></td>
+                        <td style="vertical-align:baseline"><a href="/delete/{{dog.id}}" class="text-dark">Poista</a></td>
+                        
+                        <td style="vertical-align:baseline">{{ form.course(class_='form-control') }} <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Ilmoittaudu"/></td>
+
+                        </tr>
+                    </form>
                 {% endfor %}
             </table>
         </div>

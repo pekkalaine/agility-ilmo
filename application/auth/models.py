@@ -36,7 +36,7 @@ class User(Base):
                      " WHERE (Dog.race  =  :race)"
                      " GROUP BY Account.id").params(race=race)
         res = db.engine.execute(stmt)
-
+ 
         response = []
         for row in res:
             response.append({"id":row[0], "name":row[1]})
