@@ -8,38 +8,36 @@
 
             <h3 class="mb-4">Käyttäjän {{user.name}} koirat</h3>
 
-            <table class="table table-sm table-bordered table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col" style="width: 30%">Nimi</th>
-                    <th scope="col" style="width: 20%">Rotu</th>
-                    <th scope="col" style="width: 10%"></th>
-                    <th scope="col" style="width: 10%"></th>
-                    <th scope="col" style="width: 30%">Lisää kurssille</th>
+            {% for dog in dogs %}
+            <div class="col-6 bg-light border mt-2">
 
-                    </tr>
-                </thead>
-
-                <!-- jokaisesta tr:stä form -->
-                {% for dog in dogs %}
-
+                <h5 class="mt-2">{{ dog.name }}: {{ dog.race }} </h5>
+                <a href="/update/{{dog.id}}" class="text-dark">Päivitä</a>
+                <a href="/delete/{{dog.id}}" class="text-dark">Poista</a>
+                
+                <p class="mt-4"><strong>Ilmoittautumiset:</strong></p>
+                <p>Toteuttamatta</p>
+                                    
+                    <p class="mt-4"><strong>Ilmoita {{ dog.name }} kurssille:</strong></p>
                     <form method="POST" action="{{ url_for('new_enrolment') }}">
-                        
-                        <tr>
-
                         <input type="text" name="dog_id" value="{{dog.id}}" hidden/> 
-                        
-                        <td style="vertical-align:baseline">{{ dog.name }} </td>
-                        <td style="vertical-align:baseline">{{ dog.race }}</td>
-                        <td style="vertical-align:baseline"><a href="/update/{{dog.id}}" class="text-dark">Päivitä</a></td>
-                        <td style="vertical-align:baseline"><a href="/delete/{{dog.id}}" class="text-dark">Poista</a></td>
-                        
-                        <td style="vertical-align:baseline">{{ form.course(class_='form-control') }} <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Ilmoittaudu"/></td>
+                    
+                        <table>
+                            <tr>
+                                <td>
+                                    {{ form.course(class_='form-control') }}
+                                </td>
+                                <td>
+                                    <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 ml-3 btn-outline-dark" value="Ilmoittaudu"/>
+                                </td>
+                            </tr>
 
-                        </tr>
+                        </table>
                     </form>
-                {% endfor %}
-            </table>
+                    
+            </div>
+            <br>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

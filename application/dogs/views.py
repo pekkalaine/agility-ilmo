@@ -4,16 +4,15 @@ from flask_login import login_required, current_user
 from application import app, db
 from application.dogs.models import Dog
 from application.auth.models import User
+from application.courses.models import Course
 from application.dogs.forms import DogForm
 
 from application.courses.forms import CoursesForm
 
-
-@app.route("/dogs", methods=["GET"])
+@app.route("/dogs/", methods=["GET"])
 @login_required
 def dogs_index():
     user_id = current_user.id
-
     form = CoursesForm()
     
     return render_template("dogs/list.html", dogs=Dog.find_dogs_of_user(user_id), user = User.query.get_or_404(user_id), form = form)
@@ -29,13 +28,8 @@ def dogs_form():
 def dogs_create():
     form = DogForm(request.form)
 
-    print('**************************** before validate')
-
     if not form.validate():
         return render_template("dogs/new.html", form=form)
-
-    print('**************************** after validate')
-
 
     c = Dog(form.name.data, form.race.data)
     c.account_id = current_user.id
@@ -67,14 +61,22 @@ def update(id):
         form = DogForm(request.form)
 
         if not form.validate():
-            return render_template("/dogs", form=form)
+            return render_template("/dogs/", form=form)
 
         dog.name = form.name.data
         dog.race = form.race.data
        
         db.session.commit()
-        return redirect('/dogs')
+        return redirect('/dogs/')
     
     else:
         return render_template('dogs/update.html', dog=dog, form=DogForm())
-        
+
+@app.route("/dogs/byenrolment", methods=["POST"])
+@login_required
+def dogs_byenrolment():
+
+    course_id = request.form.get("course_id")
+    course = Course.query.get_or_404(course_id)
+
+    return render_template("/dogs/byenrolment.html", dogs=Dog.find_dogs_by_enrolment(course_id), course=course)

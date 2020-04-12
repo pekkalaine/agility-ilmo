@@ -10,7 +10,7 @@ from application.courses.forms import CourseForm
 
 @app.route("/courses", methods=["GET"])
 def courses_index():
-    return render_template("courses/list.html", courses=Course.query.all())
+    return render_template("courses/list.html", courses=Course.query.all(), form=CourseForm())
 
 
 @app.route("/courses/new/")
@@ -24,12 +24,8 @@ def courses_form():
 def courses_create():
     form = CourseForm(request.form)
 
-    print('********************* before validate')
-
     if not form.validate():
         return render_template("courses/new.html", form=form)
-
-    print('********************* after validate')
 
     c = Course(form.name.data, form.description.data, form.max_participants.data)
 

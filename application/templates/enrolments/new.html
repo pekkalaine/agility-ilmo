@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<div class="col-6 bg-light border mt-5">
+  <div class="form">
+    <h4 class="mb-4 mt-2">{{course.name }}</h4>
+    <p>Kurssikuvaus: {{course.description}}</p>
+    <p>Maksimi osallistujamäärä: {{course.max_participants}}</p>
+    <br>
+
+    <p><strong>Lisätäänkö {{dog.name}} tälle kurssille?</strong></p>
+
+    <table>
+      <tr>
+        <td>
+          <form method="POST"  action="{{ url_for('enrolment_add') }}">
+      
+          <input type="text" name="dog_id" value="{{dog.id}}" hidden/>
+          <input type="text" name="course_id" value="{{course.id}}" hidden/>
+      
+          <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Kyllä"/>
+          </form>
+          </td>
+
+        <td>
+          <form method="GET" action="{{ url_for('dogs_index') }}">
+            <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Ei"/>
+          </form>
+        </td>
+      </tr>
+    </table>
+    
+  </div>
+</div>
+{% endblock %}
