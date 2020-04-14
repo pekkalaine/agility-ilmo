@@ -18,22 +18,22 @@
                 <p class="mt-4"><strong>Ilmoittautumiset:</strong></p>
                 <p>Toteuttamatta</p>
                                     
-                    <p class="mt-4"><strong>Ilmoita {{ dog.name }} kurssille:</strong></p>
-                    <form method="POST" action="{{ url_for('new_enrolment') }}">
-                        <input type="text" name="dog_id" value="{{dog.id}}" hidden/> 
-                    
-                        <table>
-                            <tr>
-                                <td>
-                                    {{ form.course(class_='form-control') }}
-                                </td>
-                                <td>
-                                    <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 ml-3 btn-outline-dark" value="Ilmoittaudu"/>
-                                </td>
-                            </tr>
+                <p class="mt-4"><strong>Ilmoita {{ dog.name }} kurssille:</strong></p>
+                <form method="POST" action="{{ url_for('new_enrolment') }}">
+                    <input type="text" name="dog_id" value="{{dog.id}}" hidden/> 
+                
+                    <table class="mb-4">
+                        <tr>
+                            <td>
+                                {{ form.course(class_='form-control') }}
+                            </td>
+                            <td>
+                                <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 ml-3 btn-outline-dark" value="Ilmoittaudu"/>
+                            </td>
+                        </tr>
 
-                        </table>
-                    </form>
+                    </table>
+                </form>
                     
             </div>
             <br>

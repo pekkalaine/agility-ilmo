@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required, current_user
+from flask_login import current_user
 
-from application import app, db
+from application import app, db, login_required
 
 from application.courses.models import Course
 
@@ -14,13 +14,13 @@ def courses_index():
 
 
 @app.route("/courses/new/")
-@login_required
+@login_required(role="ADMIN")
 def courses_form():
     return render_template("courses/new.html", form=CourseForm())
 
 
 @app.route("/courses/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def courses_create():
     form = CourseForm(request.form)
 
@@ -36,7 +36,7 @@ def courses_create():
 
 
 @app.route('/courses/delete/<int:id>')
-@login_required
+@login_required(role="ADMIN")
 def delete_course(id):
     course_to_delete = Course.query.get_or_404(id)
 
@@ -47,7 +47,7 @@ def delete_course(id):
 
 
 @app.route('/courses/update/<int:id>', methods=["GET", "POST"])
-@login_required
+@login_required(role="ADMIN")
 def update_course(id):
     course = Course.query.get_or_404(id)
 

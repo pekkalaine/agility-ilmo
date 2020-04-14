@@ -29,6 +29,9 @@ class User(Base):
     def is_authenticated(self):
         return True
 
+    def roles(self):
+        return ["ADMIN"]
+
     @staticmethod
     def find_users_with_race(race):
         stmt = text("SELECT Account.id, Account.name FROM Account"
@@ -36,7 +39,7 @@ class User(Base):
                      " WHERE (Dog.race  =  :race)"
                      " GROUP BY Account.id").params(race=race)
         res = db.engine.execute(stmt)
- 
+
         response = []
         for row in res:
             response.append({"id":row[0], "name":row[1]})
