@@ -20,11 +20,10 @@
                         <a href="/courses/delete/{{course.id}}" class="text-dark">Poista</a>
                     </p>
                    
-
                     <form method="POST" action="{{ url_for('dogs_byenrolment') }}">
                         <input type="text" name="course_id" value="{{course.id}}" hidden/>
                     <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Kurssin koirat"/>
-                    
+                    </form>
                     
                 </div>
                 <br>

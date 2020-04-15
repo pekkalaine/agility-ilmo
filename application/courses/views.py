@@ -4,11 +4,12 @@ from flask_login import current_user
 from application import app, db, login_required
 
 from application.courses.models import Course
-
 from application.courses.forms import CourseForm
+from application.enrolments.models import Enrolment
 
 
 @app.route("/courses", methods=["GET"])
+@login_required(role="ADMIN")
 def courses_index():
     return render_template("courses/list.html", courses=Course.query.all(), form=CourseForm())
 
@@ -39,6 +40,12 @@ def courses_create():
 @login_required(role="ADMIN")
 def delete_course(id):
     course_to_delete = Course.query.get_or_404(id)
+
+    #onko kurssille ilmoittautumisia:
+    enrolments = Enrolment.find_enrolments_by_course(course_to_delete.id)
+
+    if enrolments:
+        return redirect(url_for("courses_index"))
 
     db.session.delete(course_to_delete)
     db.session.commit()

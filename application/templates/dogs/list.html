@@ -16,7 +16,29 @@
                 <a href="/delete/{{dog.id}}" class="text-dark">Poista</a>
                 
                 <p class="mt-4"><strong>Ilmoittautumiset:</strong></p>
-                <p>Toteuttamatta</p>
+                <p><i>Toteuttamatta</i></p>
+
+
+                <!-- {% for enrolment in enrolments if dog.id==enrolment.dog_id%}
+
+                <table>
+                    
+                    <tr>
+                        <form method="POST" action="{{ url_for('enrolments_cancel_bydog') }}">
+                            <input type="text" name="enrolment_id" value="{{enrolment.id}}" hidden/>
+                        <td>
+                            {% for course in courses if course.id==enrolment.course_id%}
+                                {{course.name}}
+                            {% endfor %}
+                        </td>
+                            
+                        <td>
+                            <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 ml-3 btn-outline-dark" value="Peru"/>
+                        </td>
+                    </tr>
+                </table>
+                
+                {% endfor %} -->
                                     
                 <p class="mt-4"><strong>Ilmoita {{ dog.name }} kurssille:</strong></p>
                 <form method="POST" action="{{ url_for('new_enrolment') }}">

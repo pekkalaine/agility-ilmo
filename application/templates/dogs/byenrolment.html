@@ -6,17 +6,27 @@
 
     <div class="col-12 ">
 
-        <h4 class="mb-4">Kurssille {{course.name}} ilmoittautuneet koirat:</h4>
-
-    {% if dogs is defined %}
-        <ul class="list-unstyled">
+      <h4 class="mb-4">Kurssille {{course.name}} ilmoittautuneet koirat:</h4>
+      <table>
+        {% if dogs is defined %}
           {% for dog in dogs %}
-          <li>
-            {{dog.name}}
-          </li>
+
+        <form method="POST" action="{{ url_for('enrolments_cancel') }}">
+        <input type="text" name="dog_id" value="{{dog.id}}" hidden/>
+        <input type="text" name="course_id" value="{{course.id}}" hidden/>
+        <tr>
+          <td><b>{{dog.name}}</b></td>
+          <td><input type="submit" class="btn btn-light btn-sm mt-2 mb-2 ml-3 btn-outline-dark" value="Peru"/></td>
+        </tr>
+
+        </form>
+
           {% endfor %}
-        </ul>
-    {% endif %}
+        {% endif %}
+    </table>
+
+    <br>
+    <br>
 
     <form method="GET" action="{{ url_for('courses_index') }}">
       <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Palaa"/>

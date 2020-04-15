@@ -7,6 +7,8 @@ from application.auth.models import User
 from application.courses.models import Course
 from application.dogs.forms import DogForm
 
+from application.enrolments.models import Enrolment
+
 from application.courses.forms import CoursesForm
 
 @app.route("/dogs/", methods=["GET"])
@@ -14,8 +16,13 @@ from application.courses.forms import CoursesForm
 def dogs_index():
     user_id = current_user.id
     form = CoursesForm()
+    user = User.query.get_or_404(user_id)
+    dogs = Dog.find_dogs_of_user(user_id)
+
+    courses = Course.query.all()
+    enrolments = Enrolment.query.all()
     
-    return render_template("dogs/list.html", dogs=Dog.find_dogs_of_user(user_id), user = User.query.get_or_404(user_id), form = form)
+    return render_template("dogs/list.html", dogs=dogs, user=user, courses=courses, enrolments=enrolments, form=form)
 
 @app.route("/dogs/new/")
 @login_required
@@ -44,6 +51,13 @@ def dogs_create():
 @login_required
 def delete(id):
     dog_to_delete = Dog.query.get_or_404(id)
+
+    enrolment = Enrolment.find_enrolments_by_dog(dog_to_delete.id)
+
+    if enrolment:
+        error = "Poista ensin koiran" +  dog_to_delete.name + "kurssi-ilmoittautumiset"
+
+        return redirect(url_for("dogs_index"))
 
     db.session.delete(dog_to_delete)
     db.session.commit()
