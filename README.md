@@ -23,14 +23,14 @@ Asiakas voi:
 * selata sovelluksessa olevia kursseja
 * lisätä yhden tai useamman koiransa yhdelle tai useammalle kurssille
 * perua ilmoittautumisia
-* poistaa omia koiriaan.
+* poistaa omia koiriaan (poistettuaan ensin koiran ilmoittautumiset).
 
 Kouluttaja voi
 * kirjautua
 * lisätä/muokata/poistaa asiakkaiden ja koirien tietoja
 * lisätä kursseja
 * päivittää kurssien tietoja
-* poistaa kursseja
+* poistaa kursseja (poistettuaan ensin ilmoittautumiset)
 * poistaa ilmoittautumisia.
 
 ## Tietokantataulut
@@ -56,7 +56,7 @@ Kouluttaja voi
 * ajankohta: string
 * maksimi osallistujamäärä: int
 
-**KurssiKoira**
+**Kurssi-ilmoittautuminen**
 * (fk) koira_id: Koira
 * (fk) kurssi_id: Kurssi
 

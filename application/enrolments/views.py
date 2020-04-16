@@ -67,7 +67,7 @@ def enrolments_cancel():
 
     return render_template("/dogs/byenrolment.html", dogs=Dog.find_dogs_by_enrolment(course_id), course=course)
 
-
+""" 
 @app.route("/enrolments/cancel_bydog", methods=["POST", "GET"])
 @login_required
 def enrolments_cancel_bydog():
@@ -87,6 +87,4 @@ def enrolments_cancel_bydog():
     db.session.commit()
 
     return redirect(url_for("dogs_index", dogs=dogs, user=user, courses=courses, enrolments=enrolments, form=form))
-    
-
-   
+ """
