@@ -6,30 +6,53 @@
 
     <div class="col-12 ">
 
+      <div class="col-6 ">
       <h4 class="mb-4">Kurssille {{course.name}} ilmoittautuneet koirat:</h4>
-      <table>
-        {% if dogs is defined %}
+
+        {% if nro_of_enrolments == 0 %}
+
+        <p>Kurssille {{course.name}} ei ole vielä ilmoittautunut koiria.</p>
+        {% endif %}
+
+        {% if nro_of_enrolments != 0 %}
+      <table class="table table-sm table-bordered table-hover">
+        <tr>
+
+          <th scope="col" style="width: 40%">Koira</th>
+          <th scope="col" style="width: 30%">Rotu</th>
+          <th scope="col" style="width: 30%"></th>
+
+        </tr>
           {% for dog in dogs %}
 
         <form method="POST" action="{{ url_for('enrolments_cancel') }}">
         <input type="text" name="dog_id" value="{{dog.id}}" hidden/>
         <input type="text" name="course_id" value="{{course.id}}" hidden/>
-        <tr>
-          <td><b>{{dog.name}}</b></td>
-          <td><input type="submit" class="btn btn-light btn-sm mt-2 mb-2 ml-3 btn-outline-dark" value="Peru"/></td>
+        
+        <tr style="height: 40px;" >
+          <td>{{dog.name}}</td>
+          <td>{{dog.race}}</td>
+          <td>
+            {% if dog.account_id== current_user.id %}
+              <input type="submit" class="btn btn-light btn-sm btn-outline-dark" value="Peru ilmoittautuminen"/>
+            {% endif %}
+          
+          </td>
         </tr>
 
         </form>
 
           {% endfor %}
-        {% endif %}
     </table>
-
+    {% endif %}
     <br>
     <br>
 
     <form method="GET" action="{{ url_for('courses_index') }}">
       <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Palaa"/>
     </form>
+  </div>
+</div>
+</div>
 
 {% endblock %}

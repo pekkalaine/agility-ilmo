@@ -8,6 +8,10 @@
 
             <h3 class="mb-4">Käyttäjän {{user.name}} koirat</h3>
 
+            {% if nro_of_dogs==0 %}
+                <p>Sinulla ei ole vielä koiria :(</p>
+            {% endif %}
+
             {% for dog in dogs %}
             <div class="col-6 bg-light border mt-2">
 
@@ -15,12 +19,11 @@
                 <a href="/update/{{dog.id}}" class="text-dark">Päivitä</a>
                 <a href="/delete/{{dog.id}}" class="text-dark">Poista</a>
                 
-                <p class="mt-4"><strong>Ilmoittautumiset:</strong></p>
-                <p><i>Toteuttamatta</i></p>
-
-
-               
-                                    
+                <form method="POST" action="{{ url_for('enrolments_bydog') }}">
+                    <input type="text" name="dog_id" value="{{dog.id}}" hidden/>
+                <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Näytä ilmoittautumiset"/>
+                </form>
+            
                 <p class="mt-4"><strong>Ilmoita {{ dog.name }} kurssille:</strong></p>
                 <form method="POST" action="{{ url_for('new_enrolment') }}">
                     <input type="text" name="dog_id" value="{{dog.id}}" hidden/> 

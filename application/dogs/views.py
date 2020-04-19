@@ -19,10 +19,13 @@ def dogs_index():
     user = User.query.get_or_404(user_id)
     dogs = Dog.find_dogs_of_user(user_id)
 
+    nro_of_dogs = len(dogs)
+
     courses = Course.query.all()
     enrolments = Enrolment.query.all()
     
-    return render_template("dogs/list.html", dogs=dogs, user=user, courses=courses, enrolments=enrolments, form=form)
+    return render_template("dogs/list.html", dogs=dogs, user=user, courses=courses, 
+                enrolments=enrolments, nro_of_dogs=nro_of_dogs, form=form)
 
 @app.route("/dogs/new/")
 @login_required
@@ -55,9 +58,8 @@ def delete(id):
     enrolment = Enrolment.find_enrolments_by_dog(dog_to_delete.id)
 
     if enrolment:
-        error = "Poista ensin koiran" +  dog_to_delete.name + "kurssi-ilmoittautumiset"
-
-        return redirect(url_for("dogs_index"))
+        error = "Poista ensin koiran " +  dog_to_delete.name + " kurssi-ilmoittautumiset"
+        return render_template('/dogs/delete_enrolments_first.html', error=error)
 
     db.session.delete(dog_to_delete)
     db.session.commit()
@@ -92,5 +94,8 @@ def dogs_byenrolment():
 
     course_id = request.form.get("course_id")
     course = Course.query.get_or_404(course_id)
+    dogs = Dog.find_dogs_by_enrolment(course_id)
 
-    return render_template("/dogs/byenrolment.html", dogs=Dog.find_dogs_by_enrolment(course_id), course=course)
+    nr_of_dogs_on_course = len(dogs)
+
+    return render_template("/dogs/byenrolment.html", dogs=dogs, course=course, nr_of_dogs_on_course=nr_of_dogs_on_course)

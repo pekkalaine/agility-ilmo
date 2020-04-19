@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<div class="col-6 bg-light border mt-5">
+  <div class="form">
+
+    <form method="GET" action="{{ url_for('courses_index') }}">
+      
+      <h4 class="mb-4 mt-2"> {{error}}</h4>
+
+      <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Ok"/>
+          
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -32,14 +32,25 @@ def enrolment_add():
     course = Course.query.get_or_404(course_id)
     dog = Dog.query.get_or_404(dog_id)
 
+    course_name = course.name
+    dog_name = dog.name
+
     #onko jo ilmoittautunut:
     enrolment = Enrolment.query.filter_by(dog_id=dog_id, course_id=course_id).first()
 
     if enrolment:
-        error = dog.name + ' on jo ilmoittautunut kurssille ' + course.name
+        error = dog.name + ' on jo ilmoittautunut kurssille ' + course.name + '.'
         return render_template('/enrolments/exists.html', error=error)
 
-    c = Enrolment(course_id, dog_id)
+    #onko kurssi täynnä:
+    enrolments = Enrolment.find_enrolments_by_course(course_id)
+    nr_of_enrolments_on_course = len(enrolments)
+
+    if (nr_of_enrolments_on_course >= course.max_participants):
+        error = 'Kurssin ' + course.name + ' maksimi osallistujamäärä on ' + str(course.max_participants) + ' ja kurssi on jo täynnä.'
+        return render_template('/enrolments/course_full.html', error=error)
+
+    c = Enrolment(course_id, dog_id, course_name, dog_name)
     db.session().add(c)
     db.session().commit()
 
@@ -67,24 +78,31 @@ def enrolments_cancel():
 
     return render_template("/dogs/byenrolment.html", dogs=Dog.find_dogs_by_enrolment(course_id), course=course)
 
-""" 
-@app.route("/enrolments/cancel_bydog", methods=["POST", "GET"])
+
+@app.route("/enrolments/bydog", methods=["POST", "GET"])
 @login_required
-def enrolments_cancel_bydog():
+def enrolments_bydog():
+    dog_id = request.form.get("dog_id")
+    dog = Dog.query.get_or_404(dog_id)
 
-    user_id = current_user.id
-    form = CoursesForm()
-    user = User.query.get_or_404(user_id)
-    dogs = Dog.find_dogs_of_user(user_id)
+    enrolments = Enrolment.find_enrolments_by_dog(dog_id)
+    nro_of_enrolments = len(enrolments)
 
-    courses = Course.query.all()
-    enrolments = Enrolment.query.all()
+    return render_template("/enrolments/bydog.html", enrolments=enrolments, dog=dog, nro_of_enrolments=nro_of_enrolments)
 
-    enrolment_id = request.form.get("enrolment_id")
-    enrolment_to_delete = Enrolment.query.filter_by(id=enrolment_id).first()
 
+@app.route("/enrolments/cancel_by_dog", methods=["POST", "GET"])
+@login_required
+def enrolments_cancel_by_dog():
+    course_id = request.form.get("course_id")
+    dog_id = request.form.get("dog_id")
+
+    course = Course.query.get_or_404(course_id)
+
+    enrolment_to_delete = Enrolment.query.filter_by(dog_id=dog_id, course_id=course_id).first()
+    
     db.session.delete(enrolment_to_delete)
     db.session.commit()
 
-    return redirect(url_for("dogs_index", dogs=dogs, user=user, courses=courses, enrolments=enrolments, form=form))
- """
+    return redirect("/dogs")
+

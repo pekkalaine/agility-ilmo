@@ -9,7 +9,6 @@ class Dog(Base):
     __tablename__ = "dog"
     
     race = db.Column(db.String(200), nullable=False)
-
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
                            nullable=False) 
                            
@@ -34,7 +33,7 @@ class Dog(Base):
 
     @staticmethod
     def find_dogs_by_enrolment(course_id):
-        stmt = text("SELECT Dog.id, Dog.name FROM Dog"
+        stmt = text("SELECT Dog.id, Dog.name, Dog.race, dog.account_id FROM Dog"
                      " LEFT JOIN Enrolment ON Enrolment.dog_id = Dog.id"
                      " WHERE (Enrolment.course_id  =  :course_id)"
                      " GROUP BY Dog.id").params(course_id=course_id)
@@ -42,6 +41,6 @@ class Dog(Base):
 
         response = []
         for row in res:
-            response.append({"id":row[0], "name":row[1]})
+            response.append({"id":row[0], "name":row[1], "race":row[2], "account_id":row[3]})
 
         return response

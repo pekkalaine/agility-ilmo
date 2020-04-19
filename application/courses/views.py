@@ -45,7 +45,9 @@ def delete_course(id):
     enrolments = Enrolment.find_enrolments_by_course(course_to_delete.id)
 
     if enrolments:
-        return redirect(url_for("courses_index"))
+        error = "Poista ensin kaikki kurssin " +  course_to_delete.name + " ilmoittautumiset."
+        return render_template('/courses/delete_enrolments_first.html', error=error)
+
 
     db.session.delete(course_to_delete)
     db.session.commit()
