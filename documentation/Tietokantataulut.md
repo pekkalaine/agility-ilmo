@@ -1,6 +1,6 @@
 ## Tietokantataulut ja niiden Create table -lauseet
 
-**Käyttäjä**
+#### Käyttäjä
 * (pk) id: int
 * nimi: string
 * käyttäjätunnus: string
@@ -28,7 +28,7 @@ UNIQUE (username)
 )
 
 
-**Koira**
+#### Koira
 * (pk) id: int
 * (fk) käyttäjä_id: Käyttäjä
 * nimi: string
@@ -54,7 +54,7 @@ FOREIGN KEY(account_id) REFERENCES account (id)
 
 )
 
-**Kurssi**
+#### Kurssi
 * (pk) id: int
 * nimi: string
 * kurssikuvaus: string
@@ -72,14 +72,14 @@ name VARCHAR(200) NOT NULL,
 
 description VARCHAR(400) NOT NULL,
 
-        max_participants INTEGER NOT NULL,
+max_participants INTEGER NOT NULL,
 
-        PRIMARY KEY (id)
+PRIMARY KEY (id)
 
 )
 
 
-**Kurssi-ilmoittautuminen**
+#### Kurssi-ilmoittautuminen
 * (fk) koira_id: Koira
 * (fk) kurssi_id: Kurssi
 
