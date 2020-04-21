@@ -7,14 +7,15 @@
     <div class="col-12 ">
 
       <div class="col-6 ">
-      <h4 class="mb-4">Kurssille {{course.name}} ilmoittautuneet koirat:</h4>
+      
+        {% if nr_of_dogs_on_course==0 %}
 
-        {% if nro_of_enrolments == 0 %}
-
-        <p>Kurssille {{course.name}} ei ole vielä ilmoittautunut koiria.</p>
+        <h4>Kurssille {{course.name}} ei ole vielä ilmoittautunut koiria.</h4>
         {% endif %}
 
-        {% if nro_of_enrolments != 0 %}
+        {% if nr_of_dogs_on_course != 0 %}
+
+        <h4 class="mb-4">Kurssille {{course.name}} ilmoittautuneet koirat:</h4>
       <table class="table table-sm table-bordered table-hover">
         <tr>
 

@@ -60,6 +60,9 @@ def delete_course(id):
 def update_course(id):
     course = Course.query.get_or_404(id)
 
+    enrolments = Enrolment.find_enrolments_by_course(id)
+    nr_of_enrolments_on_course = len(enrolments)
+
     if request.method == 'POST':
 
         form = CourseForm(request.form)
@@ -67,14 +70,21 @@ def update_course(id):
         if not form.validate():
             return render_template("/courses", form=form)
 
+        #updatessa määriteltävä max osallistujamäärä < jo ilmoittautuneet:
+
+        if (form.max_participants.data < nr_of_enrolments_on_course):
+            error = 'Kurssille ' + course.name + ' on ilmoittautunut jo ' + str(nr_of_enrolments_on_course) + ' koiraa. Et voi päivittää osallistujamäärää pienemmäksi kuin ' + str(nr_of_enrolments_on_course) + '.'
+            return render_template('/courses/update_error.html', error=error)
+
         course.name = form.name.data
         course.description = form.description.data
         course.max_participants = form.max_participants.data
-       
+
         db.session.commit()
 
         return redirect('/courses')
     
     else:
-        return render_template('courses/update.html', course=course, form=CourseForm())
-        
+        return render_template('courses/update.html', course=course, 
+                form=CourseForm(name=course.name, description=course.description, 
+                max_participants=course.max_participants ))

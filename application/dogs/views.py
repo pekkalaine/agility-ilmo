@@ -16,6 +16,7 @@ from application.courses.forms import CoursesForm
 def dogs_index():
     user_id = current_user.id
     form = CoursesForm()
+
     user = User.query.get_or_404(user_id)
     dogs = Dog.find_dogs_of_user(user_id)
 
@@ -86,7 +87,8 @@ def update(id):
         return redirect('/dogs/')
     
     else:
-        return render_template('dogs/update.html', dog=dog, form=DogForm())
+        return render_template('dogs/update.html', dog=dog, 
+                form=DogForm(name=dog.name, race=dog.race))
 
 @app.route("/dogs/byenrolment", methods=["POST"])
 @login_required
@@ -97,5 +99,8 @@ def dogs_byenrolment():
     dogs = Dog.find_dogs_by_enrolment(course_id)
 
     nr_of_dogs_on_course = len(dogs)
+
+    print('************************')
+    print(nr_of_dogs_on_course)
 
     return render_template("/dogs/byenrolment.html", dogs=dogs, course=course, nr_of_dogs_on_course=nr_of_dogs_on_course)

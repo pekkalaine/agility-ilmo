@@ -20,11 +20,11 @@
             {{ form.name }}
           </td>
           <td>
-            <ul>
+            
               {% for error in form.name.errors %}
-              <li>{{ error }}</li>
+              {{ error }}<br>
               {% endfor %}
-            </ul>
+            
           </td>
         </tr>
         <tr>
@@ -35,11 +35,11 @@
             {{ form.username }}
           </td>
           <td>
-            <ul>
+            
               {% for error in form.username.errors %}
-              <li>{{ error }}</li>
+              {{ error }}<br>
               {% endfor %}
-            </ul>
+            
           </td>
         </tr>
 
@@ -51,11 +51,11 @@
             {{ form.password }}
           </td>
           <td>
-            <ul>
+            
               {% for error in form.password.errors %}
-              <li>{{ error }}</li>
+              {{ error }}<br>
               {% endfor %}
-            </ul>
+            
           </td>
         </tr>
 

@@ -18,7 +18,13 @@
                                 {{ form.name }}
                               </td>
                               
+                              <td>
+            
+                                {% for error in form.name.errors %}
+                                {{ error }}<br>
+                                {% endfor %}
                               
+                              </td>
                             </tr>
                             <tr>
                               <td>
@@ -26,6 +32,14 @@
                               </td>
                               <td>
                                 {{ form.race }}
+                              </td>
+
+                              <td>
+            
+                                {% for error in form.race.errors %}
+                                {{ error }}<br>
+                                {% endfor %}
+                              
                               </td>
                               
                             </tr>

@@ -18,11 +18,11 @@
             {{ form.name }}
           </td>
           <td>
-            <ul>
+            
               {% for error in form.name.errors %}
-              <li>{{ error }}</li>
+              {{ error }}<br>
               {% endfor %}
-            </ul>
+            
           </td>
         </tr>
         <tr>
@@ -33,11 +33,11 @@
             {{ form.description }}
           </td>
           <td>
-            <ul>
+            
               {% for error in form.description.errors %}
-              <li>{{ error }}</li>
+              {{ error }}<br>
               {% endfor %}
-            </ul>
+            
           </td>
         </tr>
         <tr>
@@ -48,11 +48,11 @@
             {{ form.max_participants }}
           </td>
           <td>
-            <ul>
+            
               {% for error in form.max_participants.errors %}
-              <li>{{ error }}</li>
+              {{ error }}<br>
               {% endfor %}
-            </ul>
+            
           </td>
         </tr>
 

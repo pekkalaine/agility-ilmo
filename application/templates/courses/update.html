@@ -15,6 +15,14 @@
                               <td>
                                 {{ form.name }}
                               </td>
+
+                              <td>
+                                
+                                  {% for error in form.name.errors %}
+                                  {{ error }}<br>
+                                  {% endfor %}
+                                
+                              </td>
                               
                             </tr>
                             <tr>
@@ -23,6 +31,14 @@
                               </td>
                               <td>
                                 {{ form.description }}
+                              </td>
+
+                              <td>
+                                
+                                  {% for error in form.description.errors %}
+                                  {{ error }}<br>
+                                  {% endfor %}
+                               
                               </td>
                               
                             </tr>
@@ -34,6 +50,15 @@
                               <td>
                                 {{ form.max_participants }}
                               </td>
+                              
+                              <td>
+                                
+                                  {% for error in form.max_participants.errors %}
+                                  {{ error }}<br>
+                                  {% endfor %}
+                                
+                              </td>
+                              
                               
                             </tr>
                         

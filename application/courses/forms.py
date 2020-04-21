@@ -9,9 +9,9 @@ from application.courses.models import Course
 
 class CourseForm(FlaskForm):
     
-    name = StringField("Kurssin nimi", [validators.InputRequired()])
-    description = StringField("Kurssikuvaus", [validators.InputRequired()])
-    max_participants = IntegerField("Osallistujamäärä", [validators.InputRequired()])
+    name = StringField("Kurssin nimi", [validators.InputRequired(), validators.length(max=15, message="Nimessä voi olla enintään 15 merkkiä.")])
+    description = StringField("Kurssikuvaus", [validators.InputRequired(), validators.length(max=200, message="Kuvauksessa voi olla enintään 15 merkkiä.")])
+    max_participants = IntegerField("Osallistujamäärä", [validators.InputRequired(), validators.NumberRange(min=1, max=20, message="Kurssilla voi olla enintään 20 koiraa.")])
 
     class Meta:
         csrf = False
@@ -22,7 +22,7 @@ def get_courses():
 
 class CoursesForm(FlaskForm):
     course = QuerySelectField('Course', [validators.InputRequired(u'Valitse kurssi')],
-                                query_factory=get_courses, get_label='name', allow_blank=True)
+                                query_factory=get_courses, get_label='name', allow_blank=False)
 
     class Meta:
         csrf = False

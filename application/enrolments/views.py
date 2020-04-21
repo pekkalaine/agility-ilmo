@@ -69,6 +69,10 @@ def enrolments_cancel():
     course_id = request.form.get("course_id")
     dog_id = request.form.get("dog_id")
 
+    dogs = Dog.find_dogs_by_enrolment(course_id)
+
+    nr_of_dogs_on_course = len(dogs)
+
     course = Course.query.get_or_404(course_id)
 
     enrolment_to_delete = Enrolment.query.filter_by(dog_id=dog_id, course_id=course_id).first()
@@ -76,7 +80,7 @@ def enrolments_cancel():
     db.session.delete(enrolment_to_delete)
     db.session.commit()
 
-    return render_template("/dogs/byenrolment.html", dogs=Dog.find_dogs_by_enrolment(course_id), course=course)
+    return render_template("/dogs/byenrolment.html", dogs=Dog.find_dogs_by_enrolment(course_id), course=course, nr_of_dogs_on_course=nr_of_dogs_on_course)
 
 
 @app.route("/enrolments/bydog", methods=["POST", "GET"])

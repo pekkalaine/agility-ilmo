@@ -6,63 +6,24 @@ Käyttäjätunnus: Kalle, Salasana: Hello
 
 Sovelluksen Heroku-versio toimii joten kuten incognitossa.
 
+[Käyttöohje](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Kayttoohje.md)
+
 [Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Tietokantakaavio.png)
 
-[Käyttötapaukset](https://github.com/pekkalaine/agility-ilmo/blob/master//documentation/kayttotapaukset.md)
+[Käyttötapaukset ja niihin liittyvät tietokantakyselyt](https://github.com/pekkalaine/agility-ilmo/blob/master//documentation/kayttotapaukset.md)
+
+
+[Tietokantakantataulut ja niiden create-lauseet](https://github.com/pekkalaine/agility-ilmo/blob/master//documentation/tietokantataulut.md)
+
 
 ## Sovelluksen kuvaus
 
-Tekeillä on agility- ja muita koirakursseja järjestävän koirakoulun tietokantasovellus. Sovellukseen voi kirjautua joko asiakkaana tai kouluttajana. Asiakkaalla voi olla sovelluksessa yksi tai useampi koira, jotka hän voi ilmoittaa yhdelle tai useammalle kurssille. Yhdellä koiralla voi olla vain yksi omistaja (asiakas). Yksi koira voi olla monella kurssilla ja toisaalta yhdellä kurssilla on yleensä monia koiria. Kouluttaja voi olla kouluttajana yhdellä tai useammalla kurssilla. Yhdellä kurssilla voi olla vain yksi kouluttaja.
+Tietokantasovellus on agility- ja muita koirakursseja järjestävän koirakoulun ilmoittautumisjärjestelmä. Käyttäjä voi luoda sovellukseen tunnuksen ja kirjautua. Käyttäjällä voi olla sovelluksessa yksi tai useampi koira, jotka hän voi ilmoittaa yhdelle tai useammalle kurssille. Yhdellä koiralla voi olla vain yksi omistaja (käyttäjä). Yksi koira voi olla monella kurssilla ja toisaalta yhdellä kurssilla on yleensä monia koiria. Käyttäjä voi luoda sovellukseen kursseja. Kaikki käyttäjät voivat ilmoittaa koiriaan kaikille kursseille, jos niillä on tilaa. Käyttäjä voi perua oman koiransa ilmoittautumisia. Käyttäjät voivat tarkastella listaa muista asiakkaista ja näiden koirista.
 
-Asiakas voi:
-* lisätä itsensä järjestelmään
-* kirjautua
-* päivittää omia tietojaan
-* lisätä itselleen yhden tai useamman koiran
-* päivittää koiriensa tietoja
-* selata sovelluksessa olevia kursseja
-* lisätä yhden tai useamman koiransa yhdelle tai useammalle kurssille
-* perua ilmoittautumisia
-* poistaa omia koiriaan (poistettuaan ensin koiran ilmoittautumiset).
+## Mitä jäi toteuttamatta
+Alkuperäisen suunnitelman mukaan sovelluksessa olisi ollut käyttäjäroolein asiakas ja kouluttaja. Kouluttaja olisi luonut kurssit ja vain kouluttaja olisi voinut päivittää kurssin tietoja. Kouluttajalla olisi lisäksi ollut mahdollisuus tarkastella kaikkien asiakkaiden tietoja ja toisaalta oikeus päivittää ja poistaa kaikkia asiakkaita, koiria, ilmoittautumisia ja kursseja. Roolit jäivät toteuttamatta, ja sovelluksen nykyisessä versiossa kouluttajalle alunperin ajatellut käyttötapaukset on suurilta osin siirretty käyttäjälle.
 
-Kouluttaja voi
-* kirjautua
-* lisätä/muokata/poistaa asiakkaiden ja koirien tietoja
-* lisätä kursseja
-* päivittää kurssien tietoja
-* poistaa kursseja (poistettuaan ensin ilmoittautumiset)
-* poistaa ilmoittautumisia.
+## Jatkokehitysdeoita
+Edellä mainitun käyttäroolien toteuttamisen lisäksi kehittäisin edelleen kurssien käsittelyä sovelluksessa. Kursseilla pitäisi olla määriteltynä ajankohta, jolloin ne järjestetään. Päättyneet kurssit siirtyisivät "Menneet kurssit" -listaukseen. Kursseille ei voisi niiden alettua enää ilmoittautua tai vaihtoehtoisesti ilmoittautumisaika määriteltäisiin erikseen.
 
-## Tietokantataulut
-
-**Asiakas**
-* (pk) id: int
-* nimi: string
-* käyttäjätunnus: string
-* salasana: string
-* yhteystiedot: string
-
-**Koira**
-* (pk) id: int
-* (fk) asiakas_id: Asiakas
-* nimi: string
-* rotu: string
-
-**Kurssi**
-* (pk) id: int
-* (fk) kouluttaja_id: Kouluttaja
-* nimi: string
-* kurssikuvaus: string
-* ajankohta: string
-* maksimi osallistujamäärä: int
-
-**Kurssi-ilmoittautuminen**
-* (fk) koira_id: Koira
-* (fk) kurssi_id: Kurssi
-
-**Kouluttaja**
-* (pk) id: int
-* nimi: string
-* käyttäjätunnus: string
-* salasana: string
-* yhteystiedot: string
+Lisäksi käyttäjien tietojen hallintaa pitäisi kehittää. Päädyin siihen ratkaisuun, että käyttäjän tietoja ei tässä versiossa voi päivittää eikä poistaa lainkaan. Ilmeinen jatkokehityskohde on myös se, että tällä hetkellä salasanat tallennetaan tietokantaan sellaisenaan. 
