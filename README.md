@@ -4,16 +4,15 @@
 
 Käyttäjätunnus: Testi, Salasana: Testi
 
-Sovelluksen Heroku-versio toimii joten kuten incognitossa.
 
 [Käyttöohje](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Kayttoohje.md)
 
-[Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Tietokantakaavio.png)
+[Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/tietokantakaavio2.png)
 
 [Käyttötapaukset ja niihin liittyvät tietokantakyselyt](https://github.com/pekkalaine/agility-ilmo/blob/master//documentation/kayttotapaukset.md)
 
 
-[Tietokantakantataulut ja niiden create-lauseet](https://github.com/pekkalaine/agility-ilmo/blob/master//documentation/tietokantataulut.md)
+[Tietokantakantataulut ja niiden create-lauseet](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Tietokantataulut.md)
 
 
 ## Sovelluksen kuvaus

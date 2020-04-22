@@ -21,4 +21,30 @@ Kun sovelluksen zipin on ladannut koneelleen esim. Githubista ja purkanut sen, s
 
 ## Sovelluksen asentaminen Herokuun
 
-Tämä on vielä työn alla.
+Tässä oletetaan että käytössä on git sekä Herokun työvälineet komentoriville ja että sovelluskansiosta on tehty paikallinen repositorio.
+
+
+Luodaan sovellukselle paikka Herokuun (Kohdan agility-ilmo tilalle pitää laittaa jotain muuta, koska nimi on jo varattu):
+
+`heroku create agility-ilmo`
+
+
+Lisätään paikalliseen versionhallintaan tieto siitä, että sovellus on Herokussa
+
+`git remote add heroku https://git.heroku.com/agility-ilmo.git`
+
+
+Lähetetään sovellus Herokuun:
+
+`git add .`
+`git commit -m "Sovellus Herokuun"`
+`git push heroku master`
+
+
+Lisätään sovelluksen käyttöön tieto siitä, että sovellus on Herokussa:
+`heroku config:set HEROKU=1`
+
+
+Lisätään Herokuun PostgreSQL-tietokanta:
+
+`heroku addons:add heroku-postgresql:hobby-dev`
