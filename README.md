@@ -7,7 +7,7 @@ Käyttäjätunnus: Testi, Salasana: Testi
 
 [Käyttöohje](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Kayttoohje.md)
 
-[Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/tietokantakaavio2.png)
+[Tietokantakaavio](https://github.com/pekkalaine/agility-ilmo/blob/master/documentation/Tietokantakaavio2.png)
 
 [Käyttötapaukset ja niihin liittyvät tietokantakyselyt](https://github.com/pekkalaine/agility-ilmo/blob/master//documentation/kayttotapaukset.md)
 
