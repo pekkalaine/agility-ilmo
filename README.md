@@ -1,8 +1,8 @@
 # Agility-ilmo
 
-[Sovellus Herokussa](https://infinite-taiga-05928.herokuapp.com)
+[Sovellus Herokussa](https://agility-ilmo.herokuapp.com/)
 
-Käyttäjätunnus: Kalle, Salasana: Hello
+Käyttäjätunnus: Testi, Salasana: Testi
 
 Sovelluksen Heroku-versio toimii joten kuten incognitossa.
 
