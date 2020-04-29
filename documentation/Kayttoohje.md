@@ -17,7 +17,7 @@ Tässä näkymässä listataan kaikki sovellukseen lisätyt käyttäjät ja heid
 
 ## Sovelluksen asentaminen paikallisesti
 
-Kun sovelluksen zipin on ladannut koneelleen esim. Githubista ja purkanut sen, saa sovelluksen riippuvuudet käyttöönsä menemällä komentorivillä sovelluksen juureen ja antamalla käskyn `pip install -r requirements.txt`. Tämä toki edellyttää että asennettavalla koneella on pip. Lisäksi lienee hyvä idea että virtuaaliympäristö on luotuna. Tämän jälkeen sovelluksen saa käynnistettyä komennolla `py run.py`. Nyt sovellus on käytettävissä selaimella osoitteessa http://localhost:5000.
+Kun sovelluksen zipin on ladannut koneelleen esim. Githubista ja purkanut sen, saa sovelluksen riippuvuudet käyttöönsä menemällä komentorivillä sovelluksen juureen ja antamalla käskyn `pip install -r requirements.txt`. Tämä toki edellyttää että asennettavalla koneella on pip. Myös tuki Python-kielisten ohjelmien suorittamiseen tarvitaan. Lisäksi lienee hyvä idea että virtuaaliympäristö on luotuna.  Tämän jälkeen sovelluksen saa käynnistettyä komennolla `py run.py`. Nyt sovellus on käytettävissä selaimella osoitteessa http://localhost:5000.
 
 ## Sovelluksen asentaminen Herokuun
 
@@ -37,7 +37,9 @@ Lisätään paikalliseen versionhallintaan tieto siitä, että sovellus on Herok
 Lähetetään sovellus Herokuun:
 
 `git add .`
+
 `git commit -m "Sovellus Herokuun"`
+
 `git push heroku master`
 
 

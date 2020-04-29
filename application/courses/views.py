@@ -46,7 +46,7 @@ def delete_course(id):
 
     if enrolments:
         error = "Poista ensin kaikki kurssin " +  course_to_delete.name + " ilmoittautumiset."
-        return render_template('/courses/delete_enrolments_first.html', error=error)
+        return render_template('/courses/error.html', error=error)
 
 
     db.session.delete(course_to_delete)
@@ -68,7 +68,9 @@ def update_course(id):
         form = CourseForm(request.form)
 
         if not form.validate():
-            return render_template("/courses", form=form)
+            return render_template('courses/update.html', course=course, 
+                form=CourseForm(name=course.name, description=course.description, 
+                max_participants=course.max_participants ))
 
         #updatessa määriteltävä max osallistujamäärä < jo ilmoittautuneet:
 

@@ -23,10 +23,9 @@ def dogs_index():
     nro_of_dogs = len(dogs)
 
     courses = Course.query.all()
-    enrolments = Enrolment.query.all()
     
     return render_template("dogs/list.html", dogs=dogs, user=user, courses=courses, 
-                enrolments=enrolments, nro_of_dogs=nro_of_dogs, form=form)
+                nro_of_dogs=nro_of_dogs, form=form)
 
 @app.route("/dogs/new/")
 @login_required
@@ -60,7 +59,11 @@ def delete(id):
 
     if enrolment:
         error = "Poista ensin koiran " +  dog_to_delete.name + " kurssi-ilmoittautumiset"
-        return render_template('/dogs/delete_enrolments_first.html', error=error)
+        return render_template('/dogs/error.html', error=error)
+
+    if (dog_to_delete.account_id != current_user.id):
+        error = "Voit poistaa vain omia koiriasi."
+        return render_template('/dogs/error.html', error=error)
 
     db.session.delete(dog_to_delete)
     db.session.commit()
@@ -78,7 +81,10 @@ def update(id):
         form = DogForm(request.form)
 
         if not form.validate():
-            return render_template("/dogs/", form=form)
+
+            print('******************* tadaa')
+            return render_template('dogs/update.html', dog=dog, 
+                form=DogForm(name=dog.name, race=dog.race))
 
         dog.name = form.name.data
         dog.race = form.race.data
@@ -87,8 +93,14 @@ def update(id):
         return redirect('/dogs/')
     
     else:
+
+        if (dog.account_id != current_user.id):
+            error = "Voit päivittää vain omien koiriesi tietoja."
+            return render_template('/dogs/error.html', error=error)
+
         return render_template('dogs/update.html', dog=dog, 
                 form=DogForm(name=dog.name, race=dog.race))
+
 
 @app.route("/dogs/byenrolment", methods=["POST"])
 @login_required
@@ -99,8 +111,5 @@ def dogs_byenrolment():
     dogs = Dog.find_dogs_by_enrolment(course_id)
 
     nr_of_dogs_on_course = len(dogs)
-
-    print('************************')
-    print(nr_of_dogs_on_course)
 
     return render_template("/dogs/byenrolment.html", dogs=dogs, course=course, nr_of_dogs_on_course=nr_of_dogs_on_course)

@@ -8,9 +8,9 @@ from application.courses.models import Course
 
 
 class CourseForm(FlaskForm):
-    
+
     name = StringField("Kurssin nimi", [validators.InputRequired(), validators.length(max=15, message="Nimessä voi olla enintään 15 merkkiä.")])
-    description = StringField("Kurssikuvaus", [validators.InputRequired(), validators.length(max=200, message="Kuvauksessa voi olla enintään 15 merkkiä.")])
+    description = StringField("Kurssikuvaus", [validators.InputRequired(), validators.length(max=50, message="Kuvauksessa voi olla enintään 50 merkkiä.")])
     max_participants = IntegerField("Osallistujamäärä", [validators.InputRequired(), validators.NumberRange(min=1, max=20, message="Kurssilla voi olla enintään 20 koiraa.")])
 
     class Meta:

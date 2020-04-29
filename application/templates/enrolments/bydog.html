@@ -4,7 +4,7 @@
 
   <div class="row justify-content-md-center mt-5">
     <div class="col-12 ">
-    <div class="col-6 ">
+      <div class="col-6 ">
 
         <h3 class="mb-4">Koiran {{dog.name}} ilmoittautumiset:</h3>
 
@@ -17,36 +17,34 @@
         {% if nro_of_enrolments != 0 %}
 
         <table class="table table-sm table-bordered table-hover">
-        <tr>
+          <tr>
 
-          <th scope="col" style="width: 60%">Kurssi</th>
-          
-          <th scope="col" style="width: 40%">Peru</th>
+            <th scope="col" style="width: 60%">Kurssi</th>
+            
+            <th scope="col" style="width: 40%">Peru</th>
 
-        </tr>
+          </tr>
           {% for enrolment in enrolments %}
 
-          
+            <tr style="height: 40px;" >
+                <form method="POST" action="{{ url_for('enrolments_cancel_by_dog') }}">
+                    <input type="text" name="dog_id" value="{{enrolment.dog_id}}" hidden/>
+                    
+                    <input type="text" name="course_id" value="{{enrolment.course_id}}" hidden/>
+                    
+                    
+                    <td>{{enrolment.course_name}}<br>
 
-        <tr style="height: 40px;" >
-            <form method="POST" action="{{ url_for('enrolments_cancel_by_dog') }}">
-                <input type="text" name="dog_id" value="{{enrolment.dog_id}}" hidden/>
-                
-                <input type="text" name="course_id" value="{{enrolment.course_id}}" hidden/>
-                
-                
-                <td>{{enrolment.course_name}}<br>
+                    </td>
+                    <td>
+                        <input type="submit" class="btn btn-light btn-sm btn-outline-dark" value="Peru"/>
+                    </td>
 
-                </td>
-                <td>
-                    <input type="submit" class="btn btn-light btn-sm btn-outline-dark" value="Peru"/>
-                </td>
-
-            </form>
-        </tr>
+                </form>
+            </tr>
 
           {% endfor %}
-    </table>
+        </table>
     {% endif %}
 
     <br>
@@ -56,7 +54,7 @@
       <input type="submit" class="btn btn-light btn-sm mt-2 mb-2 btn-outline-dark" value="Palaa"/>
     </form>
     </div>
-</div>
+  </div>
 </div>
 
 {% endblock %}
